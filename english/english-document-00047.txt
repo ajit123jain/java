@@ -1,0 +1,5 @@
+﻿<story>
+<title>Eurozone releases 110bn euro bailout package for Greece </title>
+<date>8-5-2010</date>
+<content> BERLIN: The heads of state and governments of the 16  eurozone nations on Friday launched a historic 110 billion-euro financial aid package to bailout heavily indebted  Greece from bankruptcy and vowed to fight speculators endangering the stability of their common currency.   At an emergency meeting in Brussels, the eurozone leaders expressed concern over mounting pressure on the euro in financial markets and deplored the fact that speculators were targeting other debt-ridden nations such as Portugal, Spain and  Ireland as the next candidates for a bailout.   They agreed on a "crisis management mechanism" to protect the eurozone from speculators and to prevent the  debt crisis in Greece from engulfing the whole euro area, chairman of the euro group and Prime Minister of  Luxembourg, Jean-Claude Junker, said at the conclusion of Friday's summit.  </content>
+</story>

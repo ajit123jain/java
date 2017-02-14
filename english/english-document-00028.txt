@@ -1,0 +1,5 @@
+﻿<story>
+<title>Chandrayaan-II to take off in 2013: ISRO </title>
+<date>4-1-2010</date>
+<content> TIRUCHI: The launch of India's next moon mission, Chandrayaan-II, will be in the first quarter of 2013 as per schedule, its project head said here on Sunday.   The project is shaping up as per schedule, Mylswamy Annadurai, project director, Chandrayaan-I and II of the Indian Space Research Organization, told reporters.   Chandrayaan II, the second lunar mission, a four-year project under Indo-Russian collaboration, is being executed by ISRO after the success of Chandrayaan I.   The designs of the rover and orbiter for the mission have been finalized and the fabrication will begin shortly. Chandrayaan-II, also an unmanned mission, will land on the lunar surface and make chemical, mineralogical and photo-geologic mapping of the moon to confirm Chandrayaan-I's findings.   Unlike the first lunar mission,  Chandrayaan-II will not have 11 payloads, but fewer instruments, Annadurai said. It will also investigate the presence of water.  </content>
+</story>

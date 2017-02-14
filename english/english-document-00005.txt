@@ -1,0 +1,5 @@
+﻿<story>
+<title>What is the Maastricht Discipline?  </title>
+<date>20-3-2010</date>
+<content> The term refers to conditions that all countries of the  European Union had to adhere to while adopting the Euro as a common currency. To do so, the countries had to show that their economic condition was stable and their fiscal deficit did not exceed 3%. Initially,  Poland and some other countries did not join because of their poor growth rate.   — Bhanu Pratap, Lucknow </content>
+</story>
