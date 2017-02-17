@@ -6,15 +6,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-//import java.util.function.BiFunction;
 public class InvertedIndexFrequency extends Porter{
-    public static Set<String> set =null; 
-    public static HashMap<String,HashMap<String,Double>>invert_index  = new HashMap<String,HashMap<String,Double>>(); //hashmap for inverted index
+    public static Set<String> set =null;   //hashset for stopword
+    public static HashMap<String,HashMap<String,Integer>>invert_index  = new HashMap<String,HashMap<String,Integer>>(); //hashmap for inverted index
     public static Porter port=new Porter();
-    public static Double id=1.0;
-    public static HashMap<String,Double> IDF = new HashMap<String,Double>();
-    public static HashMap<HashMap<String,String>,Double> WTF = new HashMap<HashMap<String,String>,Double>();
-   // BiFunction<String,String,Double> WTF = new BiFunction<>();
+    public static int id=1,p=0;
     public static BufferedReader bufferedReader=null;
     public static FileInputStream inputfilename=null;
     
@@ -57,112 +53,37 @@ public static void main(String[] args) throws Exception {
            set=new HashSet<String>(Arrays.asList(stopwords));    //conveting  stopword array to set   
       for(File file : listOfFiles){                           //reading file array
            invertedindex(file);                            //calling inverted index function where id docid and file name
-           //id++;                                              //increasing docid
-           //System.out.println(file.getName());
+           id++;                                              //increasing docid
+           System.out.println(file.getName());
               }
-      BufferedWriter outfile= new BufferedWriter(new OutputStreamWriter(new FileOutputStream("invert_index_Englishwtf.txt"), "UTF-8"));
-      for(Map.Entry e : invert_index.entrySet())
-      { // IDF.put(e.getKey(),(Doubl\e)(invert_index.get(e.getKey()).size()));
-          System.out.println();
-  Double use =(Double)(Math.log(listOfFiles.length/invert_index.get(e.getKey()).size()));
-  IDF.put((String) e.getKey(),(Double)((Math.log(listOfFiles.length/invert_index.get(e.getKey()).size()))));
-  
-  
-  for(Map.Entry ee : invert_index.get(e.getKey()).entrySet()){
-          HashMap<String,String>hash = new HashMap<String,String>();
-          hash.put((String)e.getKey(), (String)ee.getKey());
-         // System.out.println(""+(String)e.getKey()+" "+(String)ee.getKey()+""+(Double)ee.getValue());
-          Double use1 = use*(Double)(ee.getValue());
-         // if(((String)invert_index.get(e.getKey())).equals("delhi")){
-          System.out.println(invert_index.get(e.getKey()).get(ee)+" =  "+(String)e.getKey()+" Value = "+use1);
- //WTF.put(hash.put((String)e.getKey(),(String)ee.getKey()),(Double)((Double)ee.getValue()*((Math.log(listOfFiles.length/invert_index.get(e.getKey()).size())))));
-   WTF.put(hash,use1);
-          outfile.write((String)e.getKey()+" = "+(String)ee.getKey()+" = "+ use1+"\n");
-             }
-      }
-      for(Map.Entry e : IDF.entrySet())
-      { // IDF.put(e.getKey(),(Doubl\e)(invert_index.get(e.getKey()).size()));
-      //System.out.println(""+e.getKey()+" =  "+e.getValue() );
-      }
               
 System.out.println("Time after Write"+(System.currentTimeMillis()-startTime));
         FileOutputStream fos = new FileOutputStream("MapEnglish.ser");           
         ObjectOutputStream oos = new ObjectOutputStream(fos);             
         oos.writeObject(invert_index);                          //writing hashmap in objectoutput stream
         oos.close();
-        
-        FileOutputStream fosidf = new FileOutputStream("MapEnglishidf.ser");           
-        ObjectOutputStream oosidf = new ObjectOutputStream(fosidf);             
-        oosidf.writeObject(IDF);                          //writing hashmap in objectoutput stream
-        oosidf.close();
 
-        
-        FileOutputStream foswtf = new FileOutputStream("MapEnglishwtf.ser");           
-        ObjectOutputStream ooswtf = new ObjectOutputStream(foswtf);             
-        ooswtf.writeObject(IDF);                          //writing hashmap in objectoutput stream
-        ooswtf.close();
     }
 else{                  
-System.out.println("file exists");  
-
+System.out.println("file exists");             
 //if binary file already exists
 FileInputStream fis = new FileInputStream("MapEnglish.ser");
 ObjectInputStream ois = new ObjectInputStream(fis);
+//Map  anotherMap = (Map) ois.readObject(); //storing object input stream in hashmap
 @SuppressWarnings("unchecked")
-HashMap<String,HashMap<String,Double>> map = (HashMap<String,HashMap<String,Double>>) ois.readObject();
+HashMap<String, HashMap<String,Integer>> map = (HashMap<String, HashMap<String,Integer>>) ois.readObject();
             ois.close();
-/*System.out.println("Problem");
-//System.out.println("Problem");
-FileInputStream fiswtf = new FileInputStream("MapEnglishwtf.ser");
-ObjectInputStream oiswtf = new ObjectInputStream(fiswtf);
-HashMap<HashMap<String,String>,Double> map1 = (HashMap<HashMap<String,String>,Double>) ois.readObject();
-oiswtf.close();
-System.out.println("Problem");*/
-
-/*FileInputStream fisidf = new FileInputStream("MapEnglishidf.ser");
-ObjectInputStream oisidf = new ObjectInputStream(fiswtf);
-HashMap<String,Double> map2 = (HashMap<String,Double>) ois.readObject();
-oisidf.close();*/
-
-BufferedWriter outfile= new BufferedWriter(new OutputStreamWriter(new FileOutputStream("invert_index_English.txt"), "UTF-8"));
- for (Map.Entry m:map.entrySet()) {
-        outfile.write(m.getKey()+" : "+ m.getValue() + "\n");
-       // System.out.println("file =  "+p);
-        //p++;
-         }
- /*BufferedWriter outfilewtf= new BufferedWriter(new OutputStreamWriter(new FileOutputStream("invert_index_Englishwtf.txt"), "UTF-8"));
- for (Map.Entry m:map1.entrySet()) {
-    for(Map.Entry m1 : map.get(m.getKey())){
-    System.out.println();
-    }
-        outfilewtf.write(m.getKey()+" : "+ m.getValue() + "\n");
-       // System.out.println("file =  "+p);
-        //p++;
-         }
- /*BufferedWriter outfileidf= new BufferedWriter(new OutputStreamWriter(new FileOutputStream("invert_index_Englishidf.txt"), "UTF-8"));
- for (Map.Entry m:map2.entrySet()) {
-        outfileidf.write(m.getKey()+" : "+ m.getValue() + "\n");
-       // System.out.println("file =  "+p);
-        //p++;
-         }*/
-
-/*FileInputStream fiswtf = new FileInputStream("MapEnglishwtf.ser");
-ObjectInputStream oiswtf = new ObjectInputStream(fiswtf);
-HashMap<HashMap<String,String>,Double> map1 = (HashMap<HashMap<String,String>,Double>) ois.readObject();
-oiswtf.close();*/
        //System.out.println(map);
            // System.out.println("delete() invoked");
  /*BufferedWriter outfile= new BufferedWriter(new OutputStreamWriter(new FileOutputStream("invert_index_English.txt"), "UTF-8"));
  for (Map.Entry m:map.entrySet()) {
         outfile.write(m.getKey()+" : "+ m.getValue() + "\n");
-       // System.out.println("file =  "+p);
-        //p++;
+        System.out.println("file =  "+p);
+        p++;
          }*/
-  
- 
-        // frequency(map,"cancel"); 
+         frequency(map,"cancel"); 
          //System.out.println("Frequency");
-         //term(map,"cancel"); 
+         term(map,"cancel"); 
          
             // calling function to check stirng present in which docs
         // System.out.println("Helo");
@@ -208,26 +129,22 @@ System.out.println("finally : "+totalTime);
                         String ss=new String(arr);  */                       //convert array in string   
                         if(!invert_index.containsKey(ss)){
                             //hashmap has this String or not
-                       HashMap<String,Double> in = new HashMap<>();
-                      
-                       
-                                             in.put(file.getName(),id);
+                       HashMap<String,Integer> in = new HashMap<>();
+                       in.put(file.getName(),1);
                        invert_index.put(ss,in);              //if not put into hashmap 
                         } else
                         {
                             //if(invert_index.containsKey(ss)){
                                 if(invert_index.get(ss).containsKey(file.getName())){
-                                Double h = (Double)invert_index.get(ss).get(file.getName());
-                                h = h+1;
+                                int h = (int)invert_index.get(ss).get(file.getName());
                                 
-                               System.out.println("term = "+ss+" file "+file.getName()+" Frequency "+h);
+                               System.out.println("Now h is ="+h++);
                                // h++;
                                 invert_index.get(ss).replace(file.getName(),h++);
-                                
                                 }
                                 else{
-                                HashMap<String,Double> inin=invert_index.get(ss);            //get hasset of string 
-                                inin.put(file.getName(),id);    
+                                HashMap<String,Integer> inin=invert_index.get(ss);            //get hasset of string 
+                                inin.put(file.getName(),1);    
                                 }
                                 
 //                              }
@@ -242,10 +159,6 @@ System.out.println("finally : "+totalTime);
                               
                     
             }
-  public static void idf(){
-  
-  
-  }
   
   public static void frequency(HashMap<String,HashMap<String,Integer>> another,String str){
     if(another.containsKey(str))
